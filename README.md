@@ -35,11 +35,18 @@ Yong_ARTourism/
 ```
 
 ## Implementation status
+<img width="1900" height="1071" alt="image" src="https://github.com/user-attachments/assets/dba13fe8-7d81-4d06-b5b6-414ff14deee1" />
 
 1. **Foundation (implemented):** schema, demo records, shared configuration/PDO, escaping and CSRF helpers, first-admin setup, login/logout, protected dashboard, responsive public homepage.
+<img width="1915" height="1080" alt="image" src="https://github.com/user-attachments/assets/b9d3c248-e51d-4ba3-9768-1ea027dbdfe5" />
+
 2. **Tourism content (implemented):** category, destination, and attraction CRUD with search, public listing/detail pages, maps, and validated poster image upload. Attraction gallery upload and list pagination remain follow-up work.
+<img width="1917" height="1071" alt="image" src="https://github.com/user-attachments/assets/7a9450e7-c996-4efe-a49e-598a8c62ad35" />
+
 3. **Poster management (implemented):** poster upload, visual normalized-coordinate hotspot editor, attraction assignment, save/delete/move/resize, and activity logging.
 4. **AR targets and scanner (implemented, device test pending):** browser-side MindAR compilation produces a `.mind` buffer stored under the poster; the scanner uses MindAR Three.js image tracking, rear camera, hotspots, found/lost states, and attraction cards. A real target and supported mobile browser are required to verify tracking.
+<img width="1902" height="1067" alt="image" src="https://github.com/user-attachments/assets/999f99b5-0a9b-4f7d-87a2-b3f83cf8a5b4" />
+
 5. **Visitor integrations (implemented):** information cards, YouTube URL parsing with muted start and mute control, maps, and dynamically generated QR code. Social sharing is not included yet.
 6. **Hardening and release (partial):** prepared statements, escaped output, CSRF, admin checks, login throttling, image MIME/dimension validation, non-executable upload rules, and HTTPS messaging are in place. Full device/browser/security testing, attraction media uploads, user/settings management, and cPanel deployment testing remain.
 
