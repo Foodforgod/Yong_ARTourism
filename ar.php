@@ -1,0 +1,10 @@
+<?php
+require_once __DIR__ . '/includes/functions.php';
+$pageTitle = 'AR experience';
+$requestHost = strtolower((string) parse_url('http://' . ($_SERVER['HTTP_HOST'] ?? ''), PHP_URL_HOST));
+$isSecureContext = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https') || in_array($requestHost, ['localhost', '127.0.0.1'], true);
+$posters = db()->query("SELECT id, name, description FROM ar_posters WHERE status = 'active' AND target_status = 'ready' AND target_file IS NOT NULL ORDER BY name")->fetchAll();
+require __DIR__ . '/includes/header.php';
+?>
+<section class="ar-intro"><div class="container py-5"><div class="row justify-content-center text-center"><div class="col-lg-8"><div class="ar-emblem"><i class="fa-solid fa-vr-cardboard"></i></div><p class="eyebrow">AR TOURISM EXPLORER</p><h1 class="display-5 fw-bold">The story is just<br>within <em>reach.</em></h1><p class="lead text-secondary">Use your phone camera to scan a published tourism poster and discover the places connected to it.</p><?php if (!$isSecureContext): ?><div class="alert alert-warning text-start mt-4" role="alert"><strong>Camera access requires HTTPS.</strong> Open this page over HTTPS on your phone. Localhost is allowed for development.</div><?php endif; ?><?php if (!$posters): ?><div class="ar-empty mt-4"><i class="fa-solid fa-image"></i><h2 class="h5 mt-3">No AR posters are published yet</h2><p class="text-secondary mb-0">An administrator must upload a poster, configure its hotspots, and compile a MindAR target before scanning is available.</p></div><?php else: ?><div class="row g-3 mt-4 text-start"><?php foreach ($posters as $poster): ?><div class="col-md-6"><div class="ar-empty h-100"><h2 class="h5"><?= e($poster['name']) ?></h2><p class="text-secondary mb-0"><?= e($poster['description'] ?? '') ?></p><a class="btn btn-success mt-3" href="<?= e(app_url('ar/scan.php?poster=' . (int) $poster['id'])) ?>">Scan this poster</a></div></div><?php endforeach; ?></div><?php endif; ?></div></div></div></section>
+<?php require __DIR__ . '/includes/footer.php'; ?>
